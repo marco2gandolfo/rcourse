@@ -1,0 +1,87 @@
+---
+title: <center> <font size="+3"> COSAN R Course </font> </center>
+subtitle: <center> <font size="+3">'A basic R tutorial' </font> </center>
+author: "Marco Gandolfo"
+date: "`r Sys.Date()`"
+pagetitle: R
+output:
+    
+    rmdformats::readthedown:
+    highlight: kate
+    df_print: tibble
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(knitr)
+library(rmdformats)
+
+## Global options
+options(max.print="75")
+opts_chunk$set(echo=TRUE,
+	             cache=TRUE,
+               prompt=FALSE,
+               tidy=TRUE,
+               comment=NA,
+               message=FALSE,
+               warning=FALSE)
+opts_knit$set(width=75)
+
+
+```
+
+
+## Welcome to my **R Course**. 
+
+With this course, I aim to introduce you to the R programming language. The course doesn't assume __any previous experience__ with this or other languages. 
+Like probably most of you reading this, I use <b> R </b> for psychological sciences. Even if this course, being introductory, is supposed to be pretty general, I will be likely showing you how to do in R several of your daily tasks when dealing with data handling, processing, analysis and reporting.
+
+Programming efficiently in any language is not trivial, and the learning curve is very steep at the beginning. Further, as a psychologists, we may even be biased towards ourselves, thinking we will not be able to pick such skill which is rather for engineers or statisticians!  I hope with this course I can convince you otherwise, that after a steep learning curve, mastering and developing further your programming skills can be fun and extremely useful for your present and future jobs. Further, it will save your fingers from clicking a billion times on a spreadsheet and perhaps reduce also the amount of hidden mistakes that may be committed while dealing with the data.
+
+## What is R?
+
+Cool, but what is it! R is __an open source programming language for statistical computing__. Therefore:
+
+1. R is __open source__ , this means that thankfully it is free, and open to the public. Every line of code that generates the R language is available and public. People can contribute to its developement.People can check what is the core of the functions that it uses (e.g. in which way tha variance is estimated in a lm with the basic function).
+
+2. A __programming language__, similar to other languages such as Python, C, Java, Javascript, PHP, C++. It has its own syntax and its own words (the functions) which allow to performe operations.
+
+3. For __statistical computing__,  well R has been designed and thought particularly for data analysis, and not so much for software development. Like any programming language, it is more suitable for certain tasks than others, but you'll see that it is not the only thing it can do!
+
+## Alternatives to R and Why R?
+
+1. __SPSS__, very common in humanities, but proprietary software that works best on Windows, no Linux.
+
+2. __SAS__ widely used in sciences, proprietary software.
+
+3. __Stata__ Used in epidemiology, proprietary software
+
+4. __MATLAB__ a nice one, common in maths and engineering, but proprietary software!
+
+5. __Python__ actually very nice! :), and free
+
+__Why R?__ R is FREE!! will work interchangeably (in most cases), it is widely used in social sciences and particularly in psychological/ cognitive sciences and linguistics, and it has a lot of resources online!!
+
+## R vs R studio
+
+![This is the interface of R](C:/Users/uomom/Documents/rcourse/images/RGui.png)
+
+
+
+
+
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

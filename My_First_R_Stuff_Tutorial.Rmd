@@ -1,0 +1,641 @@
+---
+title: <center> <font size="+3"> My First R Stuff </font> </center>
+subtitle: <center> <font size="+3">'A basic R tutorial for psychologists' </font> </center>
+author: "Marco Gandolfo"
+date: "`r Sys.Date()`"
+pagetitle: R
+output:
+    
+    rmdformats::readthedown:
+    highlight: kate
+    df_print: tibble
+---
+
+
+```{r knitr_init, echo=FALSE, cache=FALSE}
+library(knitr)
+library(rmdformats)
+
+## Global options
+options(max.print="75")
+opts_chunk$set(echo=TRUE,
+	             cache=TRUE,
+               prompt=FALSE,
+               tidy=TRUE,
+               comment=NA,
+               message=FALSE,
+               warning=FALSE)
+opts_knit$set(width=75)
+
+```
+
+
+## <center> My first attempt to use R </center>
+
+R is a programming language for statistical computing, similar to other programming languages (like matlab). What are its advantages? Honestly the most obvious one for me is that I can go from a computer to the other without panicking about software licenses, drivers, spending two hours installing toolboxes. Moreover, there is a broad community out there (beyond psychologists, notably  people that do not share much their resources) ready to answer more or less dumb questions and responses to them. I believe also is a powerful tool to teach for future jobs but also to have a better grasp on the "power" of data analysis. It forces to better understand the methods that we use.
+
+# R is a calculator first of all 
+
+```{r, calculator}
+2+2
+
+50*(54-13)/42-3
+
+
+
+```
+Guess you are thinking, very cool but this is what everyone teaches you in any course of programming and it is boring. And my answer is yes, is damn boring, I tried hard to get rid of these basics that sometimes are just confusing if you want to use R for your data but I can't!
+
+But let's try to go on quickly
+
+# Create Variables
+
+Data can be stored into variables, variables have arbitrary names (also funny ones). In R you can create variables using the "<-" also called assignment operator. You can also use "=" but since the "=" sign has a use in some other bits where the assignment operator does not work I would advice you to use the "<-"
+
+Here an example:
+```{r variables}
+    
+Pizza <- "Margherita" 
+#a string
+
+LuckyNumber <- 13 
+#An integer
+
+Pizze <- c("Margherita","Funghi","Capricciosa","Focaccia","Calzone") 
+#A character vector
+    
+LuckyNumbers <- c(13,17) # a numeric vector
+
+
+```
+
+# What we can do with Variables?
+
+Well first of all we can use them to calculate stuff for instance
+
+```{r calc with vars}
+
+LuckyNumber + 7 
+
+#You can also add a constant (luckynumber) 
+#to a vector LuckyNmbers
+LuckyNumber + LuckyNumbers
+
+#Obviously you can also multiply or Divide
+
+LuckyNumber * 50 + 10
+
+
+```
+# Dataframes or Matrices
+
+In R and for data analysis we will have to have notions of what vectors are but also of matrices. in R these are called dataframes and differently from the matlab matrixes they can have nice colnames and rownames.
+A Dataframe is a two-dimensional vector which can have names for rows and columns.
+How do you create a dataframe?
+
+    data.frame(x = seq(10,1), y = seq(1,10))
+
+The code says: Make a dataframe with two column variables, x and y. X contains a sequence from 10 to 1 and a sequence from 1 to 10. We can assign this dataframe a name and recall it as much as we do with variables. Another crucial symbol for R base is the $ (cash matters, a lot)
+Anytime you have dataframes you have basically few variables stored into columns, you can call them by attaching to the name of the df a dollar (see below)
+
+```{r dataframes}
+
+
+df <- data.frame(x = seq(10,1), y = seq(1,10))
+
+#When you assign it you need to call it to see its result normally
+
+df
+
+df$x # call the x variable
+df$y # call the y variable
+
+```
+
+## Okay cool, but what we can do now with that? 
+I know you might are thinking, I could do this in excel in 5 minutes, but what's the advantage?
+First of all here we can easily Index stuff, call elements of vector or a dataframe using the
+"[]" brackets. The first element indicates rows, the second columns
+
+```{r index}
+
+Pizze[3] #in the case of a vector we call with square brackets the third element
+
+df[4,1] #in the case of a dataframe we call the 4th row of the first column (seq from 10 to 1)
+
+df[,2] #Or with "nothing"plus comma we can call all the rows of the second column only
+
+#You can also be cool and embed a vector in the indexes
+
+df[c(1:5),] #I want only the rows from 1 to 5 of my df and of course both columns
+
+```
+Indexing will become crucial if you will ever start using for loops and all that fancier computer stuff but I will show you later how squared brackets are useful to call single elements or elements that correspond to certain features 
+
+# Functions
+
+Of course in R there are functions you can apply to your nice variables and numbers. Many of them are embedded into specific packages (all for free, no hidden costs(yet)) but just to show you quickly a few:
+
+```{r, functions}
+
+sum(5,4,3,1,2)
+
+sum(df[1,])
+
+sum(LuckyNumbers) #maybe they are even luckier?
+
+mean(df$x)
+mean(df$y)  #arguably this should be the same, right?
+
+
+```
+# Logics
+A logic is anything that returns a TRUE of FALSE. Is important that you know that logics are called this way because the word will come in any googled thing about R
+The most common logic operators, at least those that I know, are:
+
+1. **"=="** means equal to
+1. **"&"** means AND, returns TRUE when both conditions are met at the same time
+1. **"|"** means OR, returns TRUE when one condition or the other are met
+1. **">"** greater than
+1. **"<"** smaller than
+1. **"!="** not equal to
+
+Logics will be very important for If statements.
+
+```{r, logics}
+
+mean(df$x) & mean(df$y) > 0
+
+mean(df$x) & LuckyNumber <= 5.5
+
+mean(df$x) | LuckyNumber == 5.5
+
+mean(df$x) == LuckyNumber
+
+```
+
+# Read data in R
+
+The functions for reading in data in R depend on what kind of file you have. The most common options are .csv, .txt, and an Excel file. Let's look at each one of those. 
+
+These functions have many arguments that help you defining some parameters of the text you are about to read.
+
+    read.table("~/myexperiments/myexperiment/mydata/data.txt", sep = "\t", header = TRUE)
+    
+With this command I am reading a text file in a specific path and with a specific name "data.txt". I am telling R that this file uses tab separator "sep = "\t" " and to read the first column as name of the variables of the data frame (set this to false if your columns do not have a name by default).
+The command above uses a function to read the file but reading isn't enough if we mean to work with these data in R. We need to store it into a variable!
+
+    Rawdata <- read.table("~/myexperiments/myexperiment/mydata/data.txt", sep = "\t", header = TRUE)
+    
+If the file you are aiming to read is a .csv then the function "read.csv" will do the job.
+
+# A practical example
+
+Datafile available to download: [menu.csv](https://marco2gandolfo.github.io/rforpsychologists/menu.csv) 
+
+Note that this dataframe has been downloaded from [Joey Stanley Website](www.joeystanley.com) who has a site full of great tutorials.
+
+**Make sure you change the path below so that it matches the path where you downloaded the datafiles locally.**
+
+```{r, read file}
+#If you are on windows instead of / you can use double \\ 
+#or just / (copying the path and inverting their orientation)
+#dataset taken from the fantastic website of Joey Stanley credits to him! (www.joeystanley.com)
+
+menu <- read.csv("https://marco2gandolfo.github.io/rforpsychologists/menu.csv", sep = ",")
+
+```
+
+Now I will introduce you some functions and few ways to look and slice/filter this nice dataset
+
+```{r, inspect your dataset}
+
+#what is the structure of the dataset, this gives you few crucial informations about the levels of your #factors and the number of your variables
+
+str(menu)
+
+#view the first 6 rows (head) and the last 6 (tail)
+
+head(menu)
+tail(menu)
+
+#if you want to see more than 6 
+head(menu,10)
+
+```
+
+# An applied example of indexing
+
+```{r, indexing}
+
+class(menu) #this returns the type of variable menu is, is a dataframe so it has rows and columns
+#I want to take the first 10 observations of the first 4 variables
+menu[1:10,1:4]
+
+#I want to take the first 10 observations of all variables excluding the first three columns -c (see negative sign)
+menu[1:10, -c(1,2,3)]
+
+#I want to take the first 30 observation of column 4 and 6. For this we need the syntax c() for #vectors
+
+menu[1:10,c(4,6)]
+
+#once we know what we want to select from the main dataframe we can assign it to a variable
+
+selmenu <- menu[1:30,c(1,3,4,6)]
+
+```
+
+Very cool, but sometimes, especially with bigger dataframes, to slice your dataframe you don't want to rely only on its position in the matrix. Could be quite confusing. Let's explore some other ways to do that in base R and let's start to have some more fun!
+
+```{r, base filtering}
+
+#Hi base R, show me the first 6 lines in which the variable fat is == 0 excluding column one to 3
+
+head(menu[menu$Fat == 0,-c(1:3)])
+
+#show me those lines where fat is 0 and they are not beverages or coffees and teas and store them in a #variable
+
+zerofat <- menu[menu$Fat ==  0 & menu$Category != "Beverages" & menu$Category != "Coffee & Tea",]
+
+```
+
+*Congratulations!* You arrived this far and you won an undressed side salad! :)
+
+What have we learnt so far?
+
+1. **Some very basic R language and syntax that will help us to understand further**
+
+1. **To read a file into R**
+
+1. **To view it and to slice it or filter it.**
+
+Not bad but there is a long way to go still.
+
+## Process and visualise data with the Tidyverse
+
+As said a particular power of R is to be able to choose from many open-source packages to do stuff.
+One of the most famous ensemble of packages for datascience is what is called the Tidyverse. This macro-package is not for analysis directly but for data wrangling data cleaning and visualisation.
+
+Let's install it! The sintax is always the same what changes is the name of the packages,
+remember that installing a package is not enough. To use it you need to load it as well. See commands below:
+
+    install.packages("tidyverse")  #to install it
+
+```{r, install packages}
+#to load it
+library(tidyverse)
+
+```
+
+What is great about it (besides that is widely used and that it has a lot of support online) is that it is very coherent and likes to have the data always organised in the same way for all the functions that it uses. A tidy dataframe is simply a dataframe in which every observation is in a Row and every variable is in a column. In a psychology example is a dataframe in which in each row there is a trial and in each column all the independent and dependent variables for instance:
+
+```{r,tidydataframe}
+
+tidyme <- data.frame(Subj = rep(1:20, each = 250), condition = c(rep("Cong",each = 125), rep("Incong", each = 125)), rt = rep(rnorm(250), each = 20 ))
+
+str(tidyme)
+summary(tidyme)
+
+#This is an example of how a tidy dataframe would look
+knitr::kable(head(tidyme, 10))
+
+```
+
+We will start with some very basic examples of data visualisation and some correlations and ttests on our fancy menu dataset. But, most importantly, we will learn how to wrap the data, create new columns and use all this tidyverse functions (from its dplyr package) that allow you to group the data and to average stuff.
+One thing at a time!!
+
+Remember at this point of the tutorial you absolutely need to have the tidyverse ensemble of packages installed and loaded  if you haven't done it yet.
+
+    library(tidyverse)
+
+# Visualising data in ggplot first.
+
+**ggplot2** is a very complex and powerful tool for data visualisation. Even if it is quite hard to use it can give you instant satisfaction by doing pretty graphs with few lines of code.
+Let's get all the reward that it gives for now.
+First of all its philosophy is relatively straightforward. the "ggplot()" function wants to know what is the dataframe from which we wanna make the graph and an "aes()" argument in which we define the x variable and the y (dependent measure usually) axes of the graph.
+The "+" sign is crucial for ggplot2 language and is honestly very handy. You can add elements to your graph by simply adding a plus sign. Each element is expressed in a function and what I usually do is to add to the "ggplot(df,aes(x,y))" what is the geometry, the type of graph that I want to do: "ggplot(df,aes(x,y)) + geom_point() " The function geom point will do a nice scatterplot. 
+I am done with the talking, remember the structure is pretty much always like this one, the rest is about making it prettier with many many functions as it can be 100% flexible in each feature you want to modify.
+
+```{r, my first plot}
+
+head(menu) 
+
+##Let's say I want to have a look at the linear relationship (I guess!) between calories and ##fat
+
+calories_vs_fat <- ggplot(menu, aes(Calories,Fat)) + geom_point() #super basic scatterplot
+
+#but to see it you have to call it
+calories_vs_fat
+
+#now let's play a little bit to add elements(regression line for instance).Do it one at a time
+
+caloriesPretty <- calories_vs_fat + #call the previous plot we did and start adding stuff
+                  geom_smooth(method = lm, se = TRUE) + # add line
+                  ggtitle("The higher the calories the more the fat") + #add a title
+                  theme_classic(base_size = 18) + #add a nicer theme
+                  coord_cartesian(ylim=c(0,60)) + #let me see only values from 0 to 60 on y
+                  coord_cartesian(xlim = c(0,1200)) + #let me see only values until 1200 kcal
+                  theme(legend.title = element_blank())  #remove legend title
+caloriesPretty  
+                
+caloriesPretty + aes(color = Category) #a bit crowded, add a color to data point per category
+
+#now let's check the pearson's R with the cor function. This takes argument x(Calories), #y(Fat) and method = "pearson" (in this case)
+
+cor(menu$Calories, menu$Fat, method = "pearson") #return only the R value! pretty high!
+
+cor.test(menu$Calories, menu$Fat) #return pearson's R and significance of correlation
+
+```
+Nice, now let's try other geoms other types of graphs that might be useful to you.
+
+1. **"geom_histogram"** Histogram
+
+1. **"geom_point"**  Scatterplot
+
+1. **"geom_boxplot"** Boxplot
+
+1. **"geom_line"** LinePlot
+
+1. **"geom_bar"** A Barplot
+
+```{r, more graphs}
+
+#boxplot
+ggplot(menu, aes(Category,Calories)) + geom_boxplot() +
+                theme_classic(base_size = 12, base_family = "Times")
+#histogram
+ggplot(menu, aes(Calories)) + geom_histogram()
+
+#line plot, not sure this is super appropriate but to have an idea of the graph type.
+ggplot(menu, aes(Fat, Calories, color = Category  )) + 
+              geom_line() +
+              coord_cartesian(xlim=c(0,30))
+              
+
+
+```
+
+# Group your data and prepare them for the analyses
+
+## Now is time to play with *realistic* data 
+
+We want to start doing more serious stuff now. And for that we will need "real" data
+What we will do?
+
+1. **Average a matrix by participant by condition to make it ready for an ANOVA**
+
+1. **Compute new variables from the existing ones**
+
+1. **Filter Participants or certain observations out**
+
+1. **Perform an ANOVA with the "ez" package**
+
+We will take **FAKE** (randomly generated) data of an imaginary experiment which represent a nice mixed anova design.
+
+We compare two different image categorisation experiments (1 with face pictures the other one with objects). Different participants participated to the two experiments.
+
+In each experiments participants were stimulated either to a FaceArea or a ObjectArea Moreover in both experiments the image to judge was either congruent or incongruent with another image in the background.
+
+**So this is a simple 2 (face/object experiment(Between)) x 2 (TMS site, facearea/objectarea) x 2 (congruent/incongruent irrelevant image) **
+
+What do the experimenters expect expect? In the face experiment effects on RT (and maybe also on the congruency) when stimulating the face area (site of interest) but not for the object area (control site). In the Object experiment the opposite is effected , some effect on RT for the object area but not the face area. 
+
+To show you how to filter data we will exclude 4 people to exclude over 46, and we will have thus 21 people per experiment which went through two stimulation sites and 2 rt conditions (congruent, incongruent).
+
+It smells like the experimenters are hypothesising for at least an interaction Experiment x Site where there are some specific effects on Reaction times in each task depending on which site has received the stimulation. Also we might expect these effects to be modulated by the congruency between the relevant image judged and the image in the background.
+
+Remember that these data are not real so what we hope or hypothesised will probably not appear!
+
+**Link to the dataframe to download** [randomdata](https://marco2gandolfo.github.io/rforpsychologists/randomdata.csv)
+
+**Remember to change the path** if you have downloaded the file locally.
+
+```{r,tidyverse basic}
+
+data <- read.csv("https://marco2gandolfo.github.io/rforpsychologists/randomdata.csv", sep = ",", header = TRUE)
+
+#quick inspection to check if things are right
+
+head(data, 10)
+glimpse(data) #dplyr function to check structure similar to str()
+
+#Check with xtabs how many trials by subject by site participants went through
+#Ideally this is all matched
+
+head(xtabs(~data$SubjID + data$Site))
+
+```
+Two simple basic things already bother me. The first is that we have a column x whic we do not need, the second one is that our experiment between factor is called "Task" and, for clarity, we will rename it.
+
+From now on I will use some dplyr functions
+
+1. **"%>%"** Not directly a dplyr function also known as PIPE (c'est ne pas un pipe) this function works like the plus in ggplot 2. Allows you to keep going with the operations on your data without the need of useless code typing. You will love it. You can type it with a shortcut in R studio "cmd + shift + m"  
+
+1. **"select"** regards COLUMNS and you can pick those that you need
+
+1. **"filter"** regards ROWS and is useful to exclude rows (conditions of a variable or participants)
+
+1. **"mutate"** computes a new column based on operations on other columns 
+
+1. **"rename"** renames a specific column, equivalent to base r colnames(data$Task) <- "Experiment"
+
+1. **"group_by"** genius fantastic function to wrap up your dataframe, for instance by participant by condition and make it ready to compute things on each member of the group. So is a pre-requisite to be able to collapse by participant by condition
+
+1. **"summarise"** goes with the group_by and once a sumple is grouped you are able to summarise those groups using any function, as mean by participant by condition for RT, mean accuracy etc..
+
+Let's start one by one and will be simple!
+Remember, I said that I am annoyed by a useless X first column and the name of the between factor which I wannt to be called Experiment
+
+```{r,basicstuff}
+
+dataclean <- data %>% 
+             select(-X) %>%  #unselect the column X mind about the - sign before
+             rename(Experiment = Task) %>% #rename as Experiment the variable Task
+             filter(!SubjID %in% c("P19","P01","p58","p63"))
+            
+
+```
+
+Let's take a short break before averaging for the analyses. Select and Rename are pretty clear. I created a new variable called dataclean in which I removed the X dirty useless variable and renamed as I wanted the Task variable into Experiment. Then I filtered and the syntax might be slightly more obscure. The "%in%" sign means "Include". The Exclamation mark means "!" NO!!!!
+So I am telling the function to keep All the Rows which Have a subject ID value that DO NOT contains "P19", "P01", "p58", "p63".
+
+Now I think we are ready to generate a matrix in which we have mean Accurate RT mean accuracy by participant by condition. We will also use the mutate function to create a new column which in cognitive psychology is defined as "Efficiency". ReactionTimes/MeanAccuracy. So we give a cost in RT to those people that have been really accurate and a little discount to those that have been less accurate but very fast.
+
+Let's do IT!
+
+```{r,averaging}
+
+AveMat <- dataclean %>% 
+          group_by(SubjID, Experiment, Site, Congruency) %>%  #conditions to average for..
+          summarise(meanRT = mean(RT[Acc==1]), meanAcc = mean(Acc)) %>% #apply function to ave
+          mutate(Efficiency = meanRT/meanAcc)
+
+
+```
+Done!
+
+We grouped by the conditions we wanted to do operations independently. In Each participant, in each experiment in each site in each RT condition we summarised to apply the mean function on RT (only accurate Trials) and on accuracy. After that we made a new column that computes the efficiency by dividing these new variables. I explicitly wanted to include mutate in this flow to show you its power. We can compute new variables based on columns we have just created and not yet seen.
+
+# Do a 2 x 2 x 2 factorial ANOVA
+
+For the ANOVA I will use the commonly and nice used package EZ. To make more friendly its results to look at I will use the package psychReport.
+
+Install them please
+
+```    
+install.packages("ez")
+install.packages("psychReport")
+
+```    
+Now let's load them 
+
+```{r, load for anova}
+
+library(ez)
+library(psychReport)
+
+```
+
+The ez package has many functions and they all pretty much have the same structure. The ez functions want as argument:
+
+1. the dataframe you want to do the ANOVA from (**remember** this dataframe must be always in the long, not in the wide format, as our AveMat is)
+1. the wid or case identifier, a unique value per case or Subject (in our field is normally the subject variable)
+1. within factor
+1. between factor if any.
+
+These are only the main arguments you can give to ezANOVA but there are more (where you specify, if needed, covariates, the type of sum of square).
+If you want to explore this you can refer to the help of ez which are pretty well done I believe. To open the ezAnova help or any help for any function please type:
+
+    ?ezANOVA
+    
+Another handy function I use from this package is **ezStats**. This returns a matrix with mean and standard deviation of each condition and it is useful to see what is the direction of our effects.
+
+Let's start our analysis by studying the Efficiency variable. This will be our dependent variable, our wid argument will be the SubjID, our within arguments the Site and Congruency (Within factors) and our between factor will be Experiment.
+
+I will also try in the code to use the *psychReport* package to show you a pretty table of your results. I will use the nice aovTable function that wants the name of the variable where you store the model as an argument. Remember that to make this your ez model must have the argument "return_aov" and "detailed" equal to **TRUE**
+
+```{r,Model on Efficiency, warning = FALSE}
+
+#store my anova into a variable that I call EFF_Model
+EFF_Model <- ezANOVA(AveMat, dv =.(Efficiency), wid = .(SubjID), within = .(Site,Congruency), between = .(Experiment), return_aov = TRUE, detailed = TRUE)
+
+#use aovetable function to make a nice table stored in EFF_Modelpretty variable
+EFF_Modelpretty <- aovTable(EFF_Model, numDigits = 4, dispAovTable = TRUE)
+
+
+#ezStats to show the means and sd of each condition
+ezStats(AveMat, dv =.(Efficiency), wid = .(SubjID), within = .(Site,Congruency), between = .(Experiment))
+
+
+```
+
+Nice eh!
+
+# A real barplot with means and errorbars
+Now we want to do a proper plot and this time we will tell ggplot to do some statistics on the matrix that we have to make a nice barplot that represent the mean and error bars that represent the standard error from the mean. *Stat_summary* wants to know which geometry the stats will return, which function and on which axis this is applied. Also we add position "dodge" (relatice to the distance of the bars) and color "black" (to color the border of the bars in black) arguments to make it prettier. Note the **labs** argument useful to give a name to the labels.
+
+```{r, barplot}
+
+Effbar  <- ggplot(AveMat, aes(Site, Efficiency, fill = Congruency )) +
+           stat_summary(geom = "bar", fun.y = mean, position = "dodge", color = "black") + 
+           stat_summary(geom = "errorbar", fun.data = mean_se, position = position_dodge(.9),width = 0.2) + 
+           labs(y = "Efficiency ms/Acc", x= "Stimulation site")
+Effbar
+```           
+Nice Plot, but we are not quite there, we have error bars we have colors we have cool stuff but not yet the experiment factor in. To show an additional factor I like to use the argument "facet_wrap(~factor)".
+Let's try to add it together with a nice theme to make the graph look prettier. Remember, now that our graph is stored we can straight add a plus to add elements to our graph, very handy.
+
+```{r,prettiergraph}
+
+Effbar + facet_grid(~Experiment) + 
+        theme_classic(base_size = 18, base_family = "Times") +
+        scale_fill_grey() +
+        coord_cartesian(ylim = c(1250,2000))
+
+```
+
+I think this is a pretty acceptable paper friendly graph. There are many other personalisations and themes to explore. I created sort of my own theme for graphs and has been a pain but you can fully personalise it. 
+Another good way to try stuff is to install packages that have expanded the amount of themes you could find.
+One of these is *ggtheme*.
+
+# Do pairwise comparisons with a simple t test?
+
+```{r, t test of subset of data}
+
+#ttest on efficiency as a function of congruency effect in the ffa site in the face experiment
+
+Effttest <- t.test(Efficiency ~ Congruency, data= AveMat, paired = TRUE, subset = Site =="ffa" & Experiment == "face")
+#Call it
+Effttest
+#make it prettier with the tidy function of the package broom
+library(broom)
+tidy(Effttest)
+
+#ttest of congruency as afunction of congruency only in the object experiment
+#note that here I used the "subset" argument to filter the data 
+
+Effttest <- t.test(Efficiency ~ Congruency, data= AveMat, paired = TRUE, subset = Experiment == "object")
+
+
+```
+Now friends we are at the end of this tutorial and what I want to do is a thing that I believe is useful.
+
+# Transform your matrix from long to wide and make it SPSS or other crap software ready.
+
+I think this is useful, you can export a matrix and make it user friendly for other software.
+For some obscure reason someone does not want you to analyse your data in R?
+Do you want to double check in another software if you have done things right?
+
+While I think this is useful I strongly encourage you to abandon licensed software for analyses. Especially **SPSS**.
+If you feel you want to have a friendlier interface than R please use softwares like **jamovi** or **jasp**. I still believe that learning this eventually will give you more chances in the angry job market or anyway to expand your knowledge about the analyses that you run.
+They are open source, new and well done. Here we will make matrices that would be happily accepted by these softwares.
+
+We will try to use the **unite** function from *tidyr* (part of the tidyverse) to join in one column all the condition names into a column (for instance "ffa_congruent"). After that we will use the **spread** function to spread the efficiency values by condition.
+Another package that does that beautifully is the *reshape2* package but I believe is best to keep consistency among packages.
+
+After that we will use the "write.csv" function to write a csv and store it in our working directory.
+write.csv gets two argumens here 
+    
+    write.csv(dataframe, "path we want to write the file to")
+
+```{r, long to wide}
+
+wide_eff <- AveMat %>% #take the averaged matrix
+            select(-meanRT, -meanAcc) %>% #remove for now the meanrt and mean Acc
+            unite(Condition,  Site, Congruency) %>% #unite all the within factors in a column called "condition"
+            spread(Condition, Efficiency)
+
+head(wide_eff, 10)  #check if it looks right
+
+write.csv(wide_eff, "~/OneDrive/RCourse_Made_by_Me/rforpsychologists/wide_eff.csv")
+
+
+```
+
+# Transform matrix from wide to long 
+
+Here we use the **"gather"** function to go back into a long format matrix. I give it 3 arguments:
+
+1. The name of the collapsed column that indicate the conditions "here" conditions
+1. The name of my dependent measure that has been gathered.
+1. The name of the columns, preceded by a minus, which I do not want to gather.
+
+After that I use the handy *"separate"* function where I give it the name of the column which I want to separate, the names (as characters) of the new columns I want to create and the name of the separator.
+
+```{r,gather}
+
+long_eff <- wide_eff %>% 
+            gather(condition, Efficiency, -SubjID, -Experiment) %>% 
+            separate(condition, c("Site", "Congruency"), sep = "_")
+
+head(long_eff)
+
+```
+
+# Thanks a lot for listening/reading and hope this will be useful for you. 
+
+
+![My aim is to make you become like this guy in the image below chasing people to talk about how cool "R" is.](/Users/psp905/desktop/riscool.png)
+
+
