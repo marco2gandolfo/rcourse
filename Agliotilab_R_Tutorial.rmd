@@ -7,9 +7,11 @@ pagetitle: R
 output:
     
     rmdformats::readthedown:
-    highlight: kate
+    highlight: espresso
     df_print: tibble
 ---
+
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -26,7 +28,8 @@ opts_chunk$set(echo=TRUE,
                comment=NA,
                message=FALSE,
                warning=FALSE)
-opts_knit$set(width=75)
+opts_knit$set(width=100)
+
 
 
 ```
@@ -61,11 +64,56 @@ Cool, but what is it! R is __an open source programming language for statistical
 
 5. __Python__ actually very nice! :), and free
 
-__Why R?__ R is FREE!! will work interchangeably (in most cases), it is widely used in social sciences and particularly in psychological/ cognitive sciences and linguistics, and it has a lot of resources online!!
+__Why R?__ R is FREE!! will work interchangeably (in most cases), it is widely used in social sciences and particularly in psychological/ cognitive sciences and linguistics, and it has a lot of resources online!! In my opinion even more than any other language, but maybe I just became good enough in finding them for R more than other programming languages.
 
 ## R vs R studio
 
-![This is the interface of R](C:/Users/uomom/Documents/rcourse/images/RGui.png)
+
+
+![This is the interface of R](C:/Users/uomom/Documents/rcourse/images/RGui.png){width=70%}
+
+
+
+![This is the interface of Rstudio](C:/Users/uomom/Documents/rcourse/images/Rstudio_window.png){width=80%}
+
+
+You can already see that the <b> R </b> interface there looks like a terminal, the command line of an operating system that responds to R code. It works fine, and potentially you could write an R script in your text editor and run it through that terminal. 
+While this may work fine, it is not very handy to keep track of your objects or variables that you have created in a particular session, to see in which path you are and to have an overview of your dataframes.
+
+<b> R Studio </b> is a good solution to this!! R studio is an <i> IDE, integrated development environment </i>. It is like a wrapper on R, which makes a lot of tasks easier for you. For example, through R studio you have an integrated text editor, a workspace with all your variables and models that you have defined. Importantly, you can save your workspace and get back to it later, so that you will not need to re-run commands. If you do modelling this can be really important to save you some time since the machine takes long to run them. Further, through R studio for example I created this tutorial!!!
+Therefore it allows you to easily interface your R project with Github, to generate html pages and push them online.
+
+Note that there are other _IDE_ for R, R studio is not the only one, but perhaps is the most used. Today we will use that one, but remember that you could always look around for [alternatives](https://www.dunebook.com/best-r-programming-ide/)!!
+
+## R Studio interface
+
+
+![Image From RLadies NewCastle group](C:/Users/uomom/Documents/rcourse/images/Rstudio.jpg){width=100%}
+
+I like to think about the R studio interface with this nice example from RLadies newcastle group. The interface is like cooking! It is divided in 4 main quadrants: 
+
+1. On the top left we have the __text editor__ our recipe for the perfect pizza dough.
+
+2. On the top right there is our __Variable environment__, where like a kitchen counter you put all your ingredients ready in a little bowl to dress your turbo pizza.
+
+3. On the bottom right we have several windows - it is where several things like plots, or this page can be previewed ( __the viewer__ ), where __help__ pages are displayed, where the __files__ in your path can be seen. Finally, it allows to look at which __packages__(extra kitchen tools) are ready to use for you! Just imagine it like your beautiful cupboard plenty of ingredients.
+
+4. Last but not least, at the bottom left, finally we find the __OVEN!!__ where the cooking really happens, where every step of your recipe (your code) gets executed.
+
+## Installing R and R studio
+
+Right, Installing R is quite trivial, it is quite rare that you will encounter some problems. For today, if you do not have R and R studio installed installed we can easily run our nice R commands through [RStudio.cloud](www.rstudio.cloud). It looks slightly different from a local RStudio session,but the overall R user experience is virtually identical. For what we need in this course, we are fine with their free service, which only requires a little work to register and set up. However, for more computationally intense analyses and for daily usage you'll need to install R in your computer.
+
+You can Download __R__ from [here](https://cran.r-project.org/) for OSx, Windows or Linux.
+
+You can Download __R Studio__ from [here](https://www.rstudio.com/products/rstudio/download/)
+
+For personal use in your computer you can just download R studio Desktop, which is Free and Open Source.
+
+
+
+
+
 
 
 
