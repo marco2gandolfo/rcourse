@@ -112,8 +112,86 @@ For personal use in your computer you can just download R studio Desktop, which 
 
 
 
+## R Console (the oven)
+
+Let's start to familiarise with the console! Most simply R can be used as a handy __calculator__. 
+When we type in the console an addition e.g. (50+50) the R console will do the work for you and return the result when you press enter:
+
+```{r}
+
+50+50
+
+```
+
+You can see the output [1] 100. There it is our result returned in the console!
+
+Obviously you can ask R to handle multiple matematical operations like:
+
+```{r}
+
+50*(54-13)/42-3^2
+
+```
 
 
+R uses the same __order of operations__ that you learnt at school. That is, first calculates what is inside brackets, then the exponents `^`, then division or multiplication, then addition and subtraction.
+
+At this point you may think that this is not so useful, since you could use your nice calculator, your phone or even the calculator embedded in your OS.
+
+## Calling a function
+
+Of course, operations can get quite complex and most of the times, especially when dealing with a large number of data or with more complex constructs we cannot type in all the values and operations. That is why R allows to write (but this comes later) and call functions.
+
+For example, we can calculate the square root calling the `sqrt` function:
+
+```{r}
+sqrt(9)
+
+```
+
+Or even better, we can calculate very easily the sum of a series of numbers instead of typing plus every time
+
+```{r}
+sum(1,2,3,4)
+
+```
+
+We can also combine different functions together for example calculating the absolute value of a sum:
+
+```{r}
+
+abs(sum(1,2,-5,-10))
+```
+
+What is inside a functions is normally the value you want to perform the calculation for (the X), but also several other __arguments__. Such arguments are useful to enhance or to further characterise the operation you are going to perform.
+Let's consider `seq()` as an example:
+
+```{r}
+seq(from = 10, to = 20)
+```
+
+The function `seq()` gives you a sequence of numbers and requires two arguments, _from_ and _to_ separated by a comma. These are the number from which the sequence starts and finishes, clearly. However, if you specify you can also add the argument _by_ which has to be a number, and indicates the increment of the sequence.
+
+```{r}
+seq(from = 10, to = 20, by = 2)
+
+```
+You can see that this returned a sequence from 10 to 20 but this time increasing by 2!!
+
+## Ask R for help
+
+But how can we know what a function does and what are the arguments of a function?
+
+Just use the `?` question mark!!
+Specifically, use the question mark typing it close to the function name
+
+```{r}
+?seq
+
+```
+
+![it will look like this and appear in your viewer!](C:/Users/uomom/Documents/rcourse/images/examplehelp.jpg){width=100%}
+You can see below there are all the various arguments you can add!
 
 
 
