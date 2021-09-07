@@ -193,6 +193,115 @@ Specifically, use the question mark typing it close to the function name
 ![it will look like this and appear in your viewer!](C:/Users/uomom/Documents/rcourse/images/examplehelp.jpg){width=100%}
 You can see below there are all the various arguments you can add!
 
+## Ok thanks, now I have a fancy calculator
+
+At this stage you may think that I have been only showing you a fancy calculator, pretty hard at this stage to see it applied to real-world research data of behavioural experiments in psychology!
+But let's try to hold on the attention a bit more for these boring (but fundamental) basics..
+
+## Variables
+
+What makes a programming language better than a mere calculator is to be able to store information/data inside __variables__ ! Not only in a variable we can store a single piece of information but also several information together.
+Imagine yesterday you went out to a pizza all you can eat and that you want to remember how many slices you ate. We can store this value into a variable called `nslices` using the __assignment operator__ `<-`. This is a leftward pointing arrow in R. So it will look like this:
+
+```{r}
+nslices <- 20
+
+```
+
+Looks like you had a lot of pizza that night!
+The cool thing, is that once you assign the no. 20 to `nslices` then anytime you recall that name in the console R will remember the value it has been assigned to that: 
+
+```{r}
+nslices
+```
+
+So if you type nslices and press enter the console will return 20.
+Even more interestingly, now you can use that nslices and multiply it by any other number or any other variable that stores a number.
+Imagine you were 8 people and you had 20 slices of pizza each, how many slices? :)
+
+```{r}
+nslices*8
+```
+
+but also:
+
+```{r}
+npeople <- 8
+
+nslices*npeople
+```
+
+Remember that the data you have assigned to a variable are not necessarily fixed, these can always be updated by re-assigning a new value to them, so be careful when overwriting your variables! (some programming languages like Javascript do have distinct ways to define variables that can be overwritten and variables that cannot!)
+
+## What types of values you can store in a variable?
+
+Not only numerical values can be stored into a variable, but R recognises and handles other types of values! This will be very important because different types of values cannot be mixed when applying some functions or when working within vectors (arrays of values) (will get to that later).
+
+These type of values are:
+1. __numeric__ values: e.g. 2.1, 3.2, 4.3, 4.0
+1. __integer__ values: e.g. 1L, 2L, 29L (same as numeric, but with no decimals)
+1. __character__ values: "pizza", "rossa", "buona". These are always among quotes.
+1. __logical__ values: TRUE, FALSE
+
+## Logical operators
+
+I think for now a special mention is needed for logical values and their operators, what are they?
+There are two only possible logical values: TRUE or FALSE. This is a strongly categorical distinction. With machines there is no gray (well I wanted to be a bit dramatic here) but it is pretty much the case that everything can only be either `TRUE` or `FALSE`.
+
+Logical operators are useful in R to assess whether something is `TRUE` or `FALSE`.
+For example:
+
+```{r}
+
+3 == 5 
+
+```
+Yes, 3 is not equal to 5 and therefore R returns `FALSE`
+
+Yes, we use double equals to not confuse R that we mean a normal, mathematical equal but rather a "logical" equal.
+
+__Other logical operators__
+
+1. `==` equal to (already know this, sorry)
+1. `!=` __NOT__ equal to
+1. `<` less than or `<=` less or equal to
+1. `>` more than or `>=` more or equal to
+1. `|` __OR__, if one or the other conditions are met (it is enough to be only one to be true!)
+1. `&` __AND__, if and only if BOTH conditions are met (both have to be true to apply)
+
+Let's do a short example with `&` and `|`:
+
+```{r}
+
+4 > 2 & 4 > 1
+
+4 > 5 & 4 > 1
+
+```
+```{r}
+
+4 > 2 | 4 > 1
+
+4 > 5 | 4 > 1
+
+
+```
+
+Little question, what happened here? why in one case one true and one false and in the other both are TRUE?
+
+## Little homework
+
+1. Try to do this with characters value, 
+1. Check if characters differ between capital letters and small letters.
+
+```{r}
+
+
+
+```
+
+
+
 
 
 
