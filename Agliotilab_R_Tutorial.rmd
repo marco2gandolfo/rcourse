@@ -296,15 +296,89 @@ Little question, what happened here? why in one case one true and one false and 
 
 ## Vectors
 
+Before, when I was showing you the variables we only used them to store one single number. However, we can actually store multiple values into a variable. What is the advantage of doing that? Well you will see that there are many. One obvious advantage is that you can treat it like a single number, so if you apply a command to a variable storing a vector R will run that command to each element of that vector!!
+
+Vectors in R are indicated with `c()` which stands for combine.
+
+For example:
+
 ```{r}
 
+eleventab <- c(11, 22, 33, 44)
 
 
 ```
 
+Now we can do operations to this vector, pay attention to the result!
+
+```{r}
+
+eleventab + 11
+
+```
 
 
+You can see that R added 11 to each element of the vector.
 
+Vectors can also store characters and logicals, all types of values!
+
+1. Try yourself to make a character vector storing your favourite 3 types of pizzas!
+
+## Indexing
+
+Now we start talking a very important feature of programming languages, which is known as __indexing__!
+
+With indexing you can access any item contained in a vector depending on its position.
+
+In __R__ this is done using the square brackets.
+Let's call the second element of our `eleventab` vector:
+
+```{r}
+
+eleventab[2]
+
+```
+
+But you can also call the first 3 elements in two ways, as follows:
+
+```{r}
+
+eleventab[1:3]
+
+#or
+
+eleventab[c(1,2,3)]
+
+
+```
+
+You can also call easily all the elements minus one of your choice:
+
+```{r}
+
+eleventab[-3]
+
+```
+
+With the assigment operator and indexing you can even edit a single element of a vector
+
+```{r}
+
+eleventab[4] <- 55
+
+
+```
+
+- Try to create vectors with characters; Also the pizzatypes vector above is fine!
+- Try to use the function `length` to find out how many pizzas you have listed in your vector
+- Retrieve the third Pizza of your vector using indexing
+- Make a new variable called favourite pizza where you only store the first pizza of your pizzatypes vector
+
+I swear we are almost done with the turbo basics, to then go to work more directly with data. (Note that the turbo basics will be useful to learn any programming language, of course the syntax will be different in other languages, but what matters is to learn the logic. With the logic on hand then learning is only a matter of googling stuff!)
+
+## Looping
+
+Loops allow to apply an operation to multiple items, they allow to iterate operations as many times as we desire, with the `for` loops and/or as long as a given condition is met `while`. In R there are ways to avoid them using functions made to iterate operations without necessarily using as much text (such as `lapply` or `map`) but I think is always important to show some examples, because if you will use R a lot or any programming language, perhaps looping is the first, most intuitive thing you'd do, even if quite verbose and not always computationally efficient.
 
 
 
