@@ -378,14 +378,86 @@ I swear we are almost done with the turbo basics, to then go to work more direct
 
 ## Looping
 
-Loops allow to apply an operation to multiple items, they allow to iterate operations as many times as we desire, with the `for` loops and/or as long as a given condition is met `while`. In R there are ways to avoid them using functions made to iterate operations without necessarily using as much text (such as `lapply` or `map`) but I think is always important to show some examples, because if you will use R a lot or any programming language, perhaps looping is the first, most intuitive thing you'd do, even if quite verbose and not always computationally efficient.
+Loops allow to apply an operation to multiple items, they allow to iterate operations as many times as we desire, with the `for` loops and/or as long as a given condition is met `while`. Looping is at the core of any programming language, because they to automate repetitive tasks, making your life a little easier!
 
+In R there are ways to avoid them using functions made to iterate operations without necessarily using as much text (such as `lapply` or `map`) but I think is always important to show some examples, because if you will use R a lot or any programming language, perhaps looping is the first, most intuitive thing you'd do, even if quite verbose and not always computationally efficient.
 
+Let's start with the __while__ loop. This type of loop keeps going until a condition is held true.
 
+```{r}
+x <- 0
 
-```{r cars}
-summary(cars)
+while(x < 100){
+  x <- x + 10
+  print(x)
+}
+
 ```
+
+Nice! now this little tiny program is adding 10 every time until it reaches 100.
+
+__For loops__ work very similarly, though this time they operate for a fixed predetermined number of iterations. To fully understand for loops you must have understood how indexing works!!
+
+For example you could add 10 to x for 10 times and store the value in a variable called y.
+
+```{r}
+
+y <- c() ## empty vector to be filled during the for loop
+
+for(x in seq_along(1:10)) {
+
+  y[x] <- x + 10
+  
+   print(paste0("x is equal to ", x))
+   
+   }
+
+
+```
+Try to type in y in the console. What values are displayed? Why?
+Would values be stored in a vector if we did not use the indexing?
+
+You can use for loops with words too!! and can be useful :)
+Let's say you want to know how many letters certain pizzas have before designing the pizza menu of your future pizzeria. Also you will store those values in a numeric vector called `numletters`.
+
+To do so we need a little counter, because here we are looping through a character vector. Here, I inserted a small little counter that starts from 0 and increases by 1 every time we pass through the loop!
+It is a rough method, but it works! and it is simple to understand.
+
+```{r}
+pizzas <- c("Margherita", "Boscaiola", "Capricciosa", "QuattroFormaggi")
+numletters <- c()
+counter <- 0
+
+for(pizza in pizzas){
+  counter <- counter + 1
+  numletter <- nchar(pizza) # not pizzas!!
+  print(paste0(pizza, " is ", numletter, " letters long"))
+  numletters[counter] <- numletter
+}
+
+```
+
+## If statements
+
+If statements are conditional statements, in that they allow to execute an operation if and only if a given condition is met. Such conditions obviously need logical operators to be evaluated.
+
+```{r}
+
+if(pizza != "Margherita") {
+  print("This is not Margherita")
+} else {
+  print("This is Margherita")
+}
+
+
+```
+Why the pizza is not a Margherita? Think about the loop above!
+
+## Data Types
+
+## Create a Project!!
+
+## Read data into R (Finally!!)
 
 ## Including Plots
 
