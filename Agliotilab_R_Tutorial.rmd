@@ -453,7 +453,83 @@ if(pizza != "Margherita") {
 ```
 Why the pizza is not a Margherita? Think about the loop above!
 
-## Data Types
+## Data Structures
+
+Ok! So far, the most complex data structure we examined was the vector. You can imagine a vector like a column or a row of a matrix, a __unidimensional array__ of numbers. Of course, the good R can deal with more complex data structures.One of the most used for statistical analyses is the `data.frame`.
+
+Dataframes are like matrices with column labels. These are usually the format you read data in R and they are __bidimensional arrays__.
+
+They have two dimensions, those are __rows__ and __columns__.
+
+We start looking at an example dataframe already within R, mtcars.
+Let's have a look:
+
+```{r}
+
+head(mtcars)
+
+
+```
+Note that I used the function head to call the dataframe. This sunction shows the top elements of the matrix. There are many useful functions that apply to dataframes, other examples are:
+
+1. `tail(df)` To see the last elements
+1. `str(df)` To have an overview of the structure of the dataframe
+1. `data.frame(x = c(100,29,39), y = c(23,45,32))` To create a dataframe.
+
+## Indexing a dataframe.
+
+Like you do with vectors you can index dataframes. You can retrieve a whole column, or a whole line, or a specific element of the matrix indexing with rows and columns. This is done calling a dataframe and inserting two numbers interrupted by a comma in the square brackets. These two numbers indicate the two dimensions, specifically the first dimension is the row and the second is the column. 
+
+```{r}
+
+mtcars[1,] # this will take the first row.
+
+mtcars[,1] # this will take the first column 
+
+mtcars[1,1] # this will take the cell of the first column in the first row
+
+mtcars[1:10,] # this will take the first 10 rows.
+
+```
+
+## Use the Dollar! ($)
+
+The dollar operator in R can be used to select a variable column of a dataframe, calling it by name. Obviously you could do that also with indexing, but this is handy if for example you remember the name of the variables, e.g. in a psychology experiment could be simply `rt` the beloved reaction times.
+
+```{r}
+
+mtcars$cyl
+
+```
+
+I just retrieved the column cyl from mtcars. Note that R returns this as a vector of numbers, without its original label. You can then assign this to a variable or use that into the square brackets to filter the data manually (I will only quickly show you this because we will then use a function for filtering data, but it is still useful to understand the logic and how useful this operator can be).
+
+```{r}
+
+mtcars[mtcars$cyl == 6,]
+
+```
+
+I am telling R to take all the rows of mtcars that have mtcars$cyl equal to 6.!
+
+
+## A bit of exercises:
+
+1. With `head()` and `tail()` display the first and last 20 elements of mtcars (hint use the `?` to look into the functions).
+1. Create a data.frame called menu with two variables: Pizza (invent 3 or 4 pizza names); and price. (be cheap, pizza is not a luxurious product, it is for all!)
+1. Try the `str()` function on mtcars, how many lines and columns it has?
+1. take the first column of mtcars and store it into a variable, call it as you want!
+1. Take the cell corresponding to the third row and 4 column
+1. Take every column but the last one. 
+1. Try to do the very same thing but this time using the function `ncol()` within the square brackets.
+1. Take all ther rows of mtcars that have `disp` less than 200.
+1. Take the variable `carb` from mtcars and store it into a variable called carbonium.
+
+## Lists
+
+Lists are higher level structures, a list can contain several different other data structures inside it, it can contain multiple dataframes, multiple vectors
+
+
 
 ## Create a Project!!
 
