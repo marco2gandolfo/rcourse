@@ -549,7 +549,21 @@ print(data_list)
 
 ```
 
+To access elements of a list the notation is a bit different, particularly we can use the double squared brackets and the dollar! let's see:
 
+```{r}
+
+data_list[4] # will return mtcars as a element of a list
+
+class(data_list[4]) # indeed is still a list!
+
+data_list[[4]] # will return mtcars with its class without name, as a data.frame
+
+class(data_list[[4]])
+
+data_list[[4]]$mpg ## with the dollar you can access a particular variable within an element of a list! not bad! we went inside like a matrioska.
+
+```
 
 
 
