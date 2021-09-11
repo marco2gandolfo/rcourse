@@ -527,7 +527,31 @@ I am telling R to take all the rows of mtcars that have mtcars$cyl equal to 6.!
 
 ## Lists
 
-Lists are higher level structures, a list can contain several different other data structures inside it, it can contain multiple dataframes, multiple vectors
+Lists are higher level structures, a list can contain several different other data structures inside it, it can contain multiple dataframes, multiple vectors, logicals and matrices (data.frames without labels), they can even contain other lists! So they are the most complex datastructure in R!
+
+Now I create one list that contains :
+1. A vector
+1. A matrix
+1. A list
+1. The mtcars dataframe.
+
+Then I assign a name to each of these 4 elements using the function `names()`.
+
+
+
+
+```{r}
+
+#Author DataFlair
+data_list <- list(c("Jan","Feb","Mar"), matrix(c(1,2,3,4,-1,9), nrow = 2),list("Red",12.3), mtcars)
+names(data_list) <- c("Monat", "Matrix", "Misc", "mtcars")
+print(data_list)
+
+```
+
+
+
+
 
 
 
