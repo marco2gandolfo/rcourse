@@ -1,0 +1,584 @@
+---
+title: <center> <font size="+3"> COSAN R Course </font> </center>
+subtitle: <center> <font size="+3">'A basic R tutorial' </font> </center>
+author: "Marco Gandolfo"
+date: "`r Sys.Date()`"
+pagetitle: R
+output:
+    
+    rmdformats::readthedown:
+    highlight: espresso
+    df_print: tibble
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(knitr)
+library(rmdformats)
+
+## Global options
+options(max.print="75")
+opts_chunk$set(echo=TRUE,
+	             cache=TRUE,
+               prompt=FALSE,
+               tidy=TRUE,
+               comment=NA,
+               message=FALSE,
+               warning=FALSE)
+opts_knit$set(width=100)
+
+
+
+```
+
+
+## Welcome to my **R Course**. 
+
+With this course, I aim to introduce you to the R programming language. The course doesn't assume __any previous experience__ with this or other languages. 
+Like probably most of you reading this, I use <b> R </b> for psychological sciences. Even if this course, being introductory, is supposed to be pretty general, I will be likely showing you how to do in R several of your daily tasks when dealing with data handling, processing, analysis and reporting.
+
+Programming efficiently in any language is not trivial, and the learning curve is very steep at the beginning. Further, as a psychologists, we may even be biased towards ourselves, thinking we will not be able to pick such skill which is rather for engineers or statisticians!  I hope with this course I can convince you otherwise, that after a steep learning curve, mastering and developing further your programming skills can be fun and extremely useful for your present and future jobs. Further, it will save your fingers from clicking a billion times on a spreadsheet and perhaps reduce also the amount of hidden mistakes that may be committed while dealing with the data.
+
+## What is R?
+
+Cool, but what is it! R is __an open source programming language for statistical computing__. Therefore:
+
+1. R is __open source__ , this means that thankfully it is free, and open to the public. Every line of code that generates the R language is available and public. People can contribute to its developement.People can check what is the core of the functions that it uses (e.g. in which way tha variance is estimated in a lm with the basic function).
+
+2. A __programming language__, similar to other languages such as Python, C, Java, Javascript, PHP, C++. It has its own syntax and its own words (the functions) which allow to performe operations.
+
+3. For __statistical computing__,  well R has been designed and thought particularly for data analysis, and not so much for software development. Like any programming language, it is more suitable for certain tasks than others, but you'll see that it is not the only thing it can do!
+
+## Alternatives to R and Why R?
+
+1. __SPSS__, very common in humanities, but proprietary software that works best on Windows, no Linux.
+
+2. __SAS__ widely used in sciences, proprietary software.
+
+3. __Stata__ Used in epidemiology, proprietary software
+
+4. __MATLAB__ a nice one, common in maths and engineering, but proprietary software!
+
+5. __Python__ actually very nice! :), and free
+
+__Why R?__ R is FREE!! will work interchangeably (in most cases), it is widely used in social sciences and particularly in psychological/ cognitive sciences and linguistics, and it has a lot of resources online!! In my opinion even more than any other language, but maybe I just became good enough in finding them for R more than other programming languages.
+
+## R vs R studio
+
+
+
+![This is the interface of R](C:/Users/uomom/Documents/rcourse/images/RGui.png){width=70%}
+
+
+
+![This is the interface of Rstudio](C:/Users/uomom/Documents/rcourse/images/Rstudio_window.png){width=80%}
+
+
+You can already see that the <b> R </b> interface there looks like a terminal, the command line of an operating system that responds to R code. It works fine, and potentially you could write an R script in your text editor and run it through that terminal. 
+While this may work fine, it is not very handy to keep track of your objects or variables that you have created in a particular session, to see in which path you are and to have an overview of your dataframes.
+
+<b> R Studio </b> is a good solution to this!! R studio is an <i> IDE, integrated development environment </i>. It is like a wrapper on R, which makes a lot of tasks easier for you. For example, through R studio you have an integrated text editor, a workspace with all your variables and models that you have defined. Importantly, you can save your workspace and get back to it later, so that you will not need to re-run commands. If you do modelling this can be really important to save you some time since the machine takes long to run them. Further, through R studio for example I created this tutorial!!!
+Therefore it allows you to easily interface your R project with Github, to generate html pages and push them online.
+
+Note that there are other _IDE_ for R, R studio is not the only one, but perhaps is the most used. Today we will use that one, but remember that you could always look around for [alternatives](https://www.dunebook.com/best-r-programming-ide/)!!
+
+## R Studio interface
+
+
+![Image From RLadies NewCastle group](C:/Users/uomom/Documents/rcourse/images/Rstudio.jpg){width=100%}
+
+I like to think about the R studio interface with this nice example from RLadies newcastle group. The interface is like cooking! It is divided in 4 main quadrants: 
+
+1. On the top left we have the __text editor__ our recipe for the perfect pizza dough.
+
+2. On the top right there is our __Variable environment__, where like a kitchen counter you put all your ingredients ready in a little bowl to dress your turbo pizza.
+
+3. On the bottom right we have several windows - it is where several things like plots, or this page can be previewed ( __the viewer__ ), where __help__ pages are displayed, where the __files__ in your path can be seen. Finally, it allows to look at which __packages__(extra kitchen tools) are ready to use for you! Just imagine it like your beautiful cupboard plenty of ingredients.
+
+4. Last but not least, at the bottom left, finally we find the __OVEN!!__ where the cooking really happens, where every step of your recipe (your code) gets executed.
+
+## Installing R and R studio
+
+Right, Installing R is quite trivial, it is quite rare that you will encounter some problems. For today, if you do not have R and R studio installed installed we can easily run our nice R commands through [RStudio.cloud](www.rstudio.cloud). It looks slightly different from a local RStudio session,but the overall R user experience is virtually identical. For what we need in this course, we are fine with their free service, which only requires a little work to register and set up. However, for more computationally intense analyses and for daily usage you'll need to install R in your computer.
+
+You can Download __R__ from [here](https://cran.r-project.org/) for OSx, Windows or Linux.
+
+You can Download __R Studio__ from [here](https://www.rstudio.com/products/rstudio/download/)
+
+For personal use in your computer you can just download R studio Desktop, which is Free and Open Source.
+
+
+
+## R Console (the oven)
+
+Let's start to familiarise with the console! Most simply R can be used as a handy __calculator__. 
+When we type in the console an addition e.g. (50+50) the R console will do the work for you and return the result when you press enter:
+
+```{r}
+
+50+50
+
+```
+
+You can see the output [1] 100. There it is our result returned in the console!
+
+Obviously you can ask R to handle multiple matematical operations like:
+
+```{r}
+
+50*(54-13)/42-3^2
+
+```
+
+
+R uses the same __order of operations__ that you learnt at school. That is, first calculates what is inside brackets, then the exponents `^`, then division or multiplication, then addition and subtraction.
+
+At this point you may think that this is not so useful, since you could use your nice calculator, your phone or even the calculator embedded in your OS.
+
+## Calling a function
+
+Of course, operations can get quite complex and most of the times, especially when dealing with a large number of data or with more complex constructs we cannot type in all the values and operations. That is why R allows to write (but this comes later) and call functions.
+
+For example, we can calculate the square root calling the `sqrt` function:
+
+```{r}
+sqrt(9)
+
+```
+
+Or even better, we can calculate very easily the sum of a series of numbers instead of typing plus every time
+
+```{r}
+sum(1,2,3,4)
+
+```
+
+We can also combine different functions together for example calculating the absolute value of a sum:
+
+```{r}
+
+abs(sum(1,2,-5,-10))
+```
+
+What is inside a functions is normally the value you want to perform the calculation for (the X), but also several other __arguments__. Such arguments are useful to enhance or to further characterise the operation you are going to perform.
+Let's consider `seq()` as an example:
+
+```{r}
+seq(from = 10, to = 20)
+```
+
+The function `seq()` gives you a sequence of numbers and requires two arguments, _from_ and _to_ separated by a comma. These are the number from which the sequence starts and finishes, clearly. However, if you specify you can also add the argument _by_ which has to be a number, and indicates the increment of the sequence.
+
+```{r}
+seq(from = 10, to = 20, by = 2)
+
+```
+You can see that this returned a sequence from 10 to 20 but this time increasing by 2!!
+
+## Ask R for help
+
+But how can we know what a function does and what are the arguments of a function?
+
+Just use the `?` question mark!!
+Specifically, use the question mark typing it close to the function name
+
+```{r}
+?seq
+
+```
+
+![it will look like this and appear in your viewer!](C:/Users/uomom/Documents/rcourse/images/examplehelp.jpg){width=100%}
+You can see below there are all the various arguments you can add!
+
+## Ok thanks, now I have a fancy calculator
+
+At this stage you may think that I have been only showing you a fancy calculator, pretty hard at this stage to see it applied to real-world research data of behavioural experiments in psychology!
+But let's try to hold on the attention a bit more for these boring (but fundamental) basics..
+
+## Variables
+
+What makes a programming language better than a mere calculator is to be able to store information/data inside __variables__ ! Not only in a variable we can store a single piece of information but also several information together.
+Imagine yesterday you went out to a pizza all you can eat and that you want to remember how many slices you ate. We can store this value into a variable called `nslices` using the __assignment operator__ `<-`. This is a leftward pointing arrow in R. So it will look like this:
+
+```{r}
+nslices <- 20
+
+```
+
+Looks like you had a lot of pizza that night!
+The cool thing, is that once you assign the no. 20 to `nslices` then anytime you recall that name in the console R will remember the value it has been assigned to that: 
+
+```{r}
+nslices
+```
+
+So if you type nslices and press enter the console will return 20.
+Even more interestingly, now you can use that nslices and multiply it by any other number or any other variable that stores a number.
+Imagine you were 8 people and you had 20 slices of pizza each, how many slices? :)
+
+```{r}
+nslices*8
+```
+
+but also:
+
+```{r}
+npeople <- 8
+
+nslices*npeople
+```
+
+Remember that the data you have assigned to a variable are not necessarily fixed, these can always be updated by re-assigning a new value to them, so be careful when overwriting your variables! (some programming languages like Javascript do have distinct ways to define variables that can be overwritten and variables that cannot!)
+
+## What types of values you can store in a variable?
+
+Not only numerical values can be stored into a variable, but R recognises and handles other types of values! This will be very important because different types of values cannot be mixed when applying some functions or when working within vectors (arrays of values) (will get to that later).
+
+These type of values are:
+1. __numeric__ values: e.g. 2.1, 3.2, 4.3, 4.0
+1. __integer__ values: e.g. 1L, 2L, 29L (same as numeric, but with no decimals)
+1. __character__ values: "pizza", "rossa", "buona". These are always among quotes.
+1. __logical__ values: TRUE, FALSE
+
+## Logical operators
+
+I think for now a special mention is needed for logical values and their operators, what are they?
+There are two only possible logical values: TRUE or FALSE. This is a strongly categorical distinction. With machines there is no gray (well I wanted to be a bit dramatic here) but it is pretty much the case that everything can only be either `TRUE` or `FALSE`.
+
+Logical operators are useful in R to assess whether something is `TRUE` or `FALSE`.
+For example:
+
+```{r}
+
+3 == 5 
+
+```
+Yes, 3 is not equal to 5 and therefore R returns `FALSE`
+
+Yes, we use double equals to not confuse R that we mean a normal, mathematical equal but rather a "logical" equal.
+
+__Other logical operators__
+
+1. `==` equal to (already know this, sorry)
+1. `!=` __NOT__ equal to
+1. `<` less than or `<=` less or equal to
+1. `>` more than or `>=` more or equal to
+1. `|` __OR__, if one or the other conditions are met (it is enough to be only one to be true!)
+1. `&` __AND__, if and only if BOTH conditions are met (both have to be true to apply)
+
+Let's do a short example with `&` and `|`:
+
+```{r}
+
+4 > 2 & 4 > 1
+
+4 > 5 & 4 > 1
+
+```
+```{r}
+
+4 > 2 | 4 > 1
+
+4 > 5 | 4 > 1
+
+
+```
+
+Little question, what happened here? why in one case one true and one false and in the other both are TRUE?
+
+## Little homework
+
+1. Try to do this with characters value, 
+1. Check if characters differ between capital letters and small letters.
+
+## Vectors
+
+Before, when I was showing you the variables we only used them to store one single number. However, we can actually store multiple values into a variable. What is the advantage of doing that? Well you will see that there are many. One obvious advantage is that you can treat it like a single number, so if you apply a command to a variable storing a vector R will run that command to each element of that vector!!
+
+Vectors in R are indicated with `c()` which stands for combine.
+
+For example:
+
+```{r}
+
+eleventab <- c(11, 22, 33, 44)
+
+
+```
+
+Now we can do operations to this vector, pay attention to the result!
+
+```{r}
+
+eleventab + 11
+
+```
+
+
+You can see that R added 11 to each element of the vector.
+
+Vectors can also store characters and logicals, all types of values!
+
+1. Try yourself to make a character vector storing your favourite 3 types of pizzas!
+
+## Indexing
+
+Now we start talking a very important feature of programming languages, which is known as __indexing__!
+
+With indexing you can access any item contained in a vector depending on its position.
+
+In __R__ this is done using the square brackets.
+Let's call the second element of our `eleventab` vector:
+
+```{r}
+
+eleventab[2]
+
+```
+
+But you can also call the first 3 elements in two ways, as follows:
+
+```{r}
+
+eleventab[1:3]
+
+#or
+
+eleventab[c(1,2,3)]
+
+
+```
+
+You can also call easily all the elements minus one of your choice:
+
+```{r}
+
+eleventab[-3]
+
+```
+
+With the assigment operator and indexing you can even edit a single element of a vector
+
+```{r}
+
+eleventab[4] <- 55
+
+
+```
+
+- Try to create vectors with characters; Also the pizzatypes vector above is fine!
+- Try to use the function `length` to find out how many pizzas you have listed in your vector
+- Retrieve the third Pizza of your vector using indexing
+- Make a new variable called favourite pizza where you only store the first pizza of your pizzatypes vector
+
+I swear we are almost done with the turbo basics, to then go to work more directly with data. (Note that the turbo basics will be useful to learn any programming language, of course the syntax will be different in other languages, but what matters is to learn the logic. With the logic on hand then learning is only a matter of googling stuff!)
+
+## Looping
+
+Loops allow to apply an operation to multiple items, they allow to iterate operations as many times as we desire, with the `for` loops and/or as long as a given condition is met `while`. Looping is at the core of any programming language, because they to automate repetitive tasks, making your life a little easier!
+
+In R there are ways to avoid them using functions made to iterate operations without necessarily using as much text (such as `lapply` or `map`) but I think is always important to show some examples, because if you will use R a lot or any programming language, perhaps looping is the first, most intuitive thing you'd do, even if quite verbose and not always computationally efficient.
+
+Let's start with the __while__ loop. This type of loop keeps going until a condition is held true.
+
+```{r}
+x <- 0
+
+while(x < 100){
+  x <- x + 10
+  print(x)
+}
+
+```
+
+Nice! now this little tiny program is adding 10 every time until it reaches 100.
+
+__For loops__ work very similarly, though this time they operate for a fixed predetermined number of iterations. To fully understand for loops you must have understood how indexing works!!
+
+For example you could add 10 to x for 10 times and store the value in a variable called y.
+
+```{r}
+
+y <- c() ## empty vector to be filled during the for loop
+
+for(x in seq_along(1:10)) {
+
+  y[x] <- x + 10
+  
+   print(paste0("x is equal to ", x))
+   
+   }
+
+
+```
+Try to type in y in the console. What values are displayed? Why?
+Would values be stored in a vector if we did not use the indexing?
+
+You can use for loops with words too!! and can be useful :)
+Let's say you want to know how many letters certain pizzas have before designing the pizza menu of your future pizzeria. Also you will store those values in a numeric vector called `numletters`.
+
+To do so we need a little counter, because here we are looping through a character vector. Here, I inserted a small little counter that starts from 0 and increases by 1 every time we pass through the loop!
+It is a rough method, but it works! and it is simple to understand.
+
+```{r}
+pizzas <- c("Margherita", "Boscaiola", "Capricciosa", "QuattroFormaggi")
+numletters <- c()
+counter <- 0
+
+for(pizza in pizzas){
+  counter <- counter + 1
+  numletter <- nchar(pizza) # not pizzas!!
+  print(paste0(pizza, " is ", numletter, " letters long"))
+  numletters[counter] <- numletter
+}
+
+```
+
+## If statements
+
+If statements are conditional statements, in that they allow to execute an operation if and only if a given condition is met. Such conditions obviously need logical operators to be evaluated.
+
+```{r}
+
+if(pizza != "Margherita") {
+  print("This is not Margherita")
+} else {
+  print("This is Margherita")
+}
+
+
+```
+Why the pizza is not a Margherita? Think about the loop above!
+
+## Data Structures
+
+Ok! So far, the most complex data structure we examined was the vector. You can imagine a vector like a column or a row of a matrix, a __unidimensional array__ of numbers. Of course, the good R can deal with more complex data structures.One of the most used for statistical analyses is the `data.frame`.
+
+Dataframes are like matrices with column labels. These are usually the format you read data in R and they are __bidimensional arrays__.
+
+They have two dimensions, those are __rows__ and __columns__.
+
+We start looking at an example dataframe already within R, mtcars.
+Let's have a look:
+
+```{r}
+
+head(mtcars)
+
+
+```
+Note that I used the function head to call the dataframe. This sunction shows the top elements of the matrix. There are many useful functions that apply to dataframes, other examples are:
+
+1. `tail(df)` To see the last elements
+1. `str(df)` To have an overview of the structure of the dataframe
+1. `data.frame(x = c(100,29,39), y = c(23,45,32))` To create a dataframe.
+
+## Indexing a dataframe.
+
+Like you do with vectors you can index dataframes. You can retrieve a whole column, or a whole line, or a specific element of the matrix indexing with rows and columns. This is done calling a dataframe and inserting two numbers interrupted by a comma in the square brackets. These two numbers indicate the two dimensions, specifically the first dimension is the row and the second is the column. 
+
+```{r}
+
+mtcars[1,] # this will take the first row.
+
+mtcars[,1] # this will take the first column 
+
+mtcars[1,1] # this will take the cell of the first column in the first row
+
+mtcars[1:10,] # this will take the first 10 rows.
+
+```
+
+## Use the Dollar! ($)
+
+The dollar operator in R can be used to select a variable column of a dataframe, calling it by name. Obviously you could do that also with indexing, but this is handy if for example you remember the name of the variables, e.g. in a psychology experiment could be simply `rt` the beloved reaction times.
+
+```{r}
+
+mtcars$cyl
+
+```
+
+I just retrieved the column cyl from mtcars. Note that R returns this as a vector of numbers, without its original label. You can then assign this to a variable or use that into the square brackets to filter the data manually (I will only quickly show you this because we will then use a function for filtering data, but it is still useful to understand the logic and how useful this operator can be).
+
+```{r}
+
+mtcars[mtcars$cyl == 6,]
+
+```
+
+I am telling R to take all the rows of mtcars that have mtcars$cyl equal to 6.!
+
+
+## A bit of exercises:
+
+1. With `head()` and `tail()` display the first and last 20 elements of mtcars (hint use the `?` to look into the functions).
+1. Create a data.frame called menu with two variables: Pizza (invent 3 or 4 pizza names); and price. (be cheap, pizza is not a luxurious product, it is for all!)
+1. Try the `str()` function on mtcars, how many lines and columns it has?
+1. take the first column of mtcars and store it into a variable, call it as you want!
+1. Take the cell corresponding to the third row and 4 column
+1. Take every column but the last one. 
+1. Try to do the very same thing but this time using the function `ncol()` within the square brackets.
+1. Take all ther rows of mtcars that have `disp` less than 200.
+1. Take the variable `carb` from mtcars and store it into a variable called carbonium.
+
+## Lists
+
+Lists are higher level structures, a list can contain several different other data structures inside it, it can contain multiple dataframes, multiple vectors, logicals and matrices (data.frames without labels), they can even contain other lists! So they are the most complex datastructure in R!
+
+Now I create one list that contains :
+1. A vector
+1. A matrix
+1. A list
+1. The mtcars dataframe.
+
+Then I assign a name to each of these 4 elements using the function `names()`.
+
+
+
+
+```{r}
+
+#Author DataFlair
+data_list <- list(c("Jan","Feb","Mar"), matrix(c(1,2,3,4,-1,9), nrow = 2),list("Red",12.3), mtcars)
+names(data_list) <- c("Monat", "Matrix", "Misc", "mtcars")
+print(data_list)
+
+```
+
+To access elements of a list the notation is a bit different, particularly we can use the double squared brackets and the dollar! let's see:
+
+```{r}
+
+data_list[4] # will return mtcars as a element of a list
+
+class(data_list[4]) # indeed is still a list!
+
+data_list[[4]] # will return mtcars with its class without name, as a data.frame
+
+class(data_list[[4]])
+
+data_list[[4]]$mpg ## with the dollar you can access a particular variable within an element of a list! not bad! we went inside like a matrioska.
+
+```
+
+
+
+
+
+## Create a Project!!
+
+## Read data into R (Finally!!)
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
