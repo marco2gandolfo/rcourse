@@ -70,11 +70,12 @@ __Why R?__ R is FREE!! will work interchangeably (in most cases), it is widely u
 
 
 
-![This is the interface of R](C:/Users/uomom/Documents/rcourse/images/RGui.png){width=70%}
+![This is the interface of R](/Users/u249223/Documents/rcourse/images/RGui.png){width=70%}
 
 
 
-![This is the interface of Rstudio](C:/Users/uomom/Documents/rcourse/images/Rstudio_window.png){width=80%}
+
+![This is the interface of Rstudio](/Users/u249223/Documents/rcourse/images/Rstudio_window.png){width=80%}
 
 
 You can already see that the <b> R </b> interface there looks like a terminal, the command line of an operating system that responds to R code. It works fine, and potentially you could write an R script in your text editor and run it through that terminal. 
@@ -88,7 +89,7 @@ Note that there are other _IDE_ for R, R studio is not the only one, but perhaps
 ## R Studio interface
 
 
-![Image From RLadies NewCastle group](C:/Users/uomom/Documents/rcourse/images/Rstudio.jpg){width=100%}
+![Image From RLadies NewCastle group](/Users/u249223/Documents/rcourse/images/Rstudio.jpg){width=100%}
 
 I like to think about the R studio interface with this nice example from RLadies newcastle group. The interface is like cooking! It is divided in 4 main quadrants: 
 
@@ -190,7 +191,7 @@ Specifically, use the question mark typing it close to the function name
 
 ```
 
-![it will look like this and appear in your viewer!](C:/Users/uomom/Documents/rcourse/images/examplehelp.jpg){width=100%}
+![it will look like this and appear in your viewer!](/Users/u249223/Documents/rcourse/images/examplehelp.jpg){width=100%}
 You can see below there are all the various arguments you can add!
 
 ## Ok thanks, now I have a fancy calculator
