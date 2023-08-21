@@ -30,7 +30,7 @@ opts_knit$set(width=75)
 ```
 
 
-## <center> My first attempt to use R </center>
+# My first attempt to use R
 
 R is a programming language for statistical computing, similar to other programming languages (like matlab). What are its advantages? Honestly the most obvious one for me is that I can go from a computer to the other without panicking about software licenses, drivers, spending two hours installing toolboxes. Moreover, there is a broad community out there (beyond psychologists, notably  people that do not share much their resources) ready to answer more or less dumb questions and responses to them. I believe also is a powerful tool to teach for future jobs but also to have a better grasp on the "power" of data analysis. It forces to better understand the methods that we use.
 
