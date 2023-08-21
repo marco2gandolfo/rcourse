@@ -2,6 +2,9 @@
 
 Several of my functions that have been useful to my research are available in this repository.
 
+If you use any function from this course please refer to this DOI for acknowledgement or citation
+<a href="https://zenodo.org/badge/latestdoi/365271848"><img src="https://zenodo.org/badge/365271848.svg" alt="DOI"></a>
+
 Additionally, this repository contains also two R tutorials:
 
 1. A very very basic introduction to the programming language of R <br> <link> https://marco2gandolfo.github.io/rcourse/ultrabasictutorial.html </link>
