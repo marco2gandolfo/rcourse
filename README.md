@@ -29,4 +29,5 @@ The functions contained here are:
 10. <a href=https://github.com/marco2gandolfo/rcourse/blob/main/shrink_images.R> shrink_images.R </a>: Reduce size of a group of images and export them all in a folder.
 11. <a href=https://github.com/marco2gandolfo/rcourse/blob/main/zoom_in_image.R> zoom_in_image.R </a>: Create a zoomed in version of an image using resizing without resampling - this will look as if the image has been zoomed in with a camera - useful for testing boundary extension effects.
 12. <a href=https://github.com/marco2gandolfo/rcourse/blob/main/reverse_videos.R> reverse_videos.R </a>: Take a video - read it into R and then export a reverse played version of it.
+13. <a href=https://github.com/marco2gandolfo/rcourse/blob/main/find_obj_coordinates.R> find_obj_coordinates.R </a>: Find bounding box of an object of a neutral background and calculate its x - y coordinate and surface area in pixels.
     
